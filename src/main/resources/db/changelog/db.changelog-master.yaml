@@ -1,0 +1,48 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  1
+       author:  svilenvalkanov
+       changes:
+         -  createTable:
+              tableName:  account
+              columns:
+                -  column:
+                     name: id
+                     type: uuid
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                -  column:
+                     name:  email
+                     type:  varchar(120)
+                -  column:
+                     name:  password
+                     type:  binary(60)
+                -  column:
+                     name:  registered_at
+                     type:  timestamp
+                     constraints:
+                       nullable: false
+                -  column:
+                     name:  is_deleted
+                     type:  bit
+         -  createTable:
+              tableName:  session
+              columns:
+                -  column:
+                     name: id
+                     type: uuid
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                -  column:
+                     name:  ip_address
+                     type:  varchar(120)
+                -  column:
+                     name:  user_id
+                     type:  uuid
+                     constraints:
+                        foreignKeyName: fk_session_account
+                        references: account(id)
+                        nullable: false
+
